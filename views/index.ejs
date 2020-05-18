@@ -73,38 +73,23 @@
     <div class="container">
         <h1 class="text-center mt-3">20.1 Newsletter</h1>
         <div class="row mt-5">
-            <div class="col-lg-3 col-sm-12 mt-3">
-                <div class="card" style="background-color:#1a1a1a;color:white;">
-                    <img class="opening" src="https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2020%2F0319%2Fr681030_1296x729_16%2D9.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil voluptate tempora quam repellendus perspiciatis dolorem vitae labore itaque excepturi, incidunt doloribus sapiente atque vel voluptates dolorum culpa ipsam dolore corporis.</p>
+                  <% if (posts.length == 0) { %>
+                    <div class="card mx-auto text-center" style="background-color:#1a1a1a;color:white;">
+                      <img src="https://s3.amazonaws.com/libapps/accounts/2079/images/error_icon_400.png" alt="error" class="mx-auto" style="width:50%;">
+                      <p>No posts still</p>
                     </div>
-                  </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 mt-3">
-                <div class="card" style="background-color:#1a1a1a;color:white;">
-                    <img class="opening" src="https://specials-images.forbesimg.com/imageserve/1024724898/960x0.jpg?fit=scale" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil voluptate tempora quam repellendus perspiciatis dolorem vitae labore itaque excepturi, incidunt doloribus sapiente atque vel voluptates dolorum culpa ipsam dolore corporis.</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 mt-3">
-                <div class="card" style="background-color:#1a1a1a;color:white;">
-                    <img class="opening" src="https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/chorizo-mozarella-gnocchi-bake-cropped.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil voluptate tempora quam repellendus perspiciatis dolorem vitae labore itaque excepturi, incidunt doloribus sapiente atque vel voluptates dolorum culpa ipsam dolore corporis.</p>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-lg-3 col-sm-12 mt-3">
-              <div class="card" style="background-color:#1a1a1a;color:white;">
-                  <img class="opening" src="https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2020%2F0319%2Fr681030_1296x729_16%2D9.jpg" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil voluptate tempora quam repellendus perspiciatis dolorem vitae labore itaque excepturi, incidunt doloribus sapiente atque vel voluptates dolorum culpa ipsam dolore corporis.</p>
-                  </div>
-                </div>
-          </div>
+                  <% } else { %>
+                    <% posts.forEach((post)=>{ %>
+                      <div class="col-lg-3 col-sm-12 mt-3">
+                        <div class="card" style="background-color:#1a1a1a;color:white;">
+                          <img class="opening" src=" <%= post.img_url %>" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <p> <%= post.header %> </p>
+                          </div>
+                        </div>
+                      </div>
+                    <% }) %>
+                  <% }%>
         </div>
         <div class="row mt-5 mb-5">
             <div class="col-lg-9">
