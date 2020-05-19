@@ -1,117 +1,108 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>20.1 Newsletter</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
-    <style>
-        body{
-            color:white;
-            background-color: #1a1a1a;
-        }
-        .opening{
-            width:100%;
-            height:200px;
-        }
-        @media (max-width: 900px){
-            .opening{
-                width:100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20.1 Newsletter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <style>
+    body {
+      color: white;
+      background-color: #1a1a1a;
+      height: 100%;
+      width: 100%;
+    }
+
+    .opening {
+      width: 100%;
+      height: 200px;
+    }
+
+    @media (max-width: 900px) {
+      .opening {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
-        <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-        </div>
-      </nav>
-    <div class="container">
-        <h1 class="text-center mt-3">20.1 Newsletter</h1>
-        <div class="row mt-5">
-                  <% if (posts.length == 0) { %>
-                    <div class="card mx-auto text-center" style="background-color:#1a1a1a;color:white;">
-                      <img src="https://s3.amazonaws.com/libapps/accounts/2079/images/error_icon_400.png" alt="error" class="mx-auto" style="width:50%;">
-                      <p>No posts still</p>
-                    </div>
-                  <% } else { %>
-                    <% posts.forEach((post)=>{ %>
-                      <div class="col-lg-3 col-sm-12 mt-3">
-                        <div class="card" style="background-color:#1a1a1a;color:white;">
-                          <img class="opening" src=" <%= post.img_url %>" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <p> <%= post.header %> </p>
-                          </div>
-                        </div>
-                      </div>
-                    <% }) %>
-                  <% }%>
-        </div>
-        <div class="row mt-5 mb-5">
-            <div class="col-lg-9">
-                <div class="row card mx-2 mt-3" style="background-color:#1a1a1a;color:white;">
-                    <div class="row card-body">
-                        <div class="col-lg-3 col-sm-12">
-                            <img class=""src="https://resources.pulse.icc-cricket.com/ICC/photo/2019/08/04/48581f98-d0f4-40f5-a73a-40e3d5178a90/GettyImages-1159285351.jpg" alt="" style="width:100%;">
-                        </div>
-                        <div class="col-lg-9 pt-2 px-2 card-text text-center" style="width:100%;">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, velit, vitae excepturi explicabo in neque voluptatum dolorum rem similique officiis ab aspernatur. Quas aut, officiis illo quia pariatur harum obcaecati.</p>
-                        </div>
-                    </div>        
-                </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="http://www.forgeforward.in/images/forge-logo-04-trimmed.png" alt="logo" style="width:100px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/form">Add posts<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
             </div>
-            <div class="col-lg-3 card pl-2" style="background-color:#1a1a1a;color:white;">
-                <div class="row mt-2 card-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum alias voluptas, commodi itaque, aperiam quibusdam veniam.</p>
-                </div>
-            </div>
-        </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-    
+  </nav>
+  <!-- navbar end -->
+  <div class="container" style="width:100%;height:100%;">
+    <h1 class="text-center mt-3">20.1 Newsletter</h1>
+    <div class="row mt-2 mx-auto" style="width:100%;height:25rem;">
+      <% if (posts.length == 0) { %>
+      <div class="card mx-auto text-center" style="background-color:#1a1a1a;color:white;">
+        <img src="https://s3.amazonaws.com/libapps/accounts/2079/images/error_icon_400.png" alt="error" class="mx-auto"
+          style="width:50%;">
+        <p>No posts still</p>
+      </div>
+      <% } else { %>
+      <% posts.forEach((post)=>{ %>
+      <div class="col-lg-3 col-sm-12 mt-3 px-1" style="position: relative;height:25rem;">
+        <img class="img-fluid" style="width:100%;height:25rem;object-fit:cover;"src="<%= post.img_url %>" alt="" style="width:250px; height:350px;">
+        <div style="position:absolute;bottom:2rem;left:1rem;right:1rem;color:white;font-family: roboto;">
+          <a href="" class="mb-2 px-1" style="color:white;background-color: #38587b;font-size:15px;"> <%= post.category %></a>
+          <h3 class="mb-1 mt-1" style="font-size:22px;"><%= post.header %></h3>
+          <p style="font-size: 10px;"> <%= post.date %> </p>
+          <a href="/update/<%= post._id %>"><button class="btn btn-small btn-warning">Update</button></a>
+          <a class="text-right" href="/delete/<%= post._id %>"><button class="btn btn-small btn-danger">delete</button></a>
+        </div>
+      </div>
+      <% }) %>
+      <% }%>
+    </div>
 </body>
 
 </html>
