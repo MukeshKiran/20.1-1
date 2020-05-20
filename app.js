@@ -1,3 +1,4 @@
+// require packages
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -7,21 +8,12 @@ var passport = require('passport')
 var localStrategy = require('passport-local')
 var passportLocalMongoose = require('passport-local-mongoose')
 var Admin = require('./models/admin.js')
-
+// set up
 const app = express()
-
-// passport config
-app.use(require("express-session")({
-    secret : "Winter is coming",
-    resave : false,
-    saveUninitialized : false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new localStrategy(Admin.authenticate()));
-passport.serializeUser(Admin.serializeUser());
-passport.deserializeUser(Admin.deserializeUser());
-// 
+app.use(express.static("views"))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride("_method"))
+// firebase config
 var serviceAccount = require("/Users/kalaiselvan/Desktop/20.1/credentials/serviceAccountKey.json");
 
 admin.initializeApp({
@@ -29,7 +21,7 @@ admin.initializeApp({
     databaseURL: "https://node-app-47467.firebaseio.com"
 });
 const db = admin.firestore()
-
+// mongodb config
 mongoose.connect("mongodb+srv://admin:admin@cluster0-7u4hv.mongodb.net/test?retryWrites=true&w=majority", {useUnifiedTopology:true, useNewUrlParser: true }).then(() => console.log("connected to db")).catch(err => console.log(err))
 
 const dataSchema = new mongoose.Schema({
@@ -48,32 +40,22 @@ const postData = new mongoose.Schema({
 
 var User = mongoose.model("User", dataSchema)
 var Post = mongoose.model("Post", postData)
-
-
-app.use(express.static("views"))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(methodOverride("_method"))
-
+// passport config
+app.use(require("express-session")({
+    secret : "Winter is coming",
+    resave : false,
+    saveUninitialized : false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(Admin.authenticate()));
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
+// routes
 app.get('/',(req,res)=>{
+    req.flash("welcome","Stark")
     res.render("landing.ejs")
 })
-
-app.post('/register',(req,res)=>{
-    var newUser = new Admin({username:req.body.username})
-    Admin.register(newUser,req.body.password,(err,user)=>{
-        if(err){
-            res.redirect('/')
-        }
-        passport.authenticate("local")(req,res,()=>{
-            res.redirect('/home')
-        })
-    })
-})
-
-app.post('/login',passport.authenticate("local",{
-    successRedirect:"/home",
-    failureRedirect:"/"
-}))
 
 app.get('/home', isLoggedIn,(req, res) => {
     // db.collection("Posts").get().then(snap => {
@@ -100,6 +82,42 @@ app.get('/form',isLoggedIn,(req, res) => {
     res.render("form.ejs")
 })
 
+app.get("/logout",function(req,res){
+    req.logout();
+    // alert("Logged out successfully");
+    res.redirect("/");
+})
+app.get('/update/:id',isLoggedIn,(req,res)=>{
+    var id = req.params.id
+    Post.findById(id).then(post => {
+        res.render('updateform.ejs',{post:post})
+    })
+})
+
+app.get('/delete/:id', isLoggedIn,(req,res)=>{
+    var id = req.params.id
+    Post.findByIdAndDelete(id).then(console.log("deleted")).catch(err => console.log(err))
+    res.redirect('/home')
+})
+
+// post
+app.post('/login',passport.authenticate("local",{
+    successRedirect:"/home",
+    failureRedirect:"/"
+}))
+
+
+app.post('/register',(req,res)=>{
+    var newUser = new Admin({username:req.body.username})
+    Admin.register(newUser,req.body.password,(err,user)=>{
+        if(err){
+            res.redirect('/')
+        }
+        passport.authenticate("local")(req,res,()=>{
+            res.redirect('/home')
+        })
+    })
+})
 
 app.post('/form', (req, res) => {
     var fireData = {
@@ -123,17 +141,6 @@ app.post('/form', (req, res) => {
         console.log("can't save post")
     })
 })
-app.get("/logout",function(req,res){
-    req.logout();
-    // alert("Logged out successfully");
-    res.redirect("/");
-})
-app.get('/update/:id',isLoggedIn,(req,res)=>{
-    var id = req.params.id
-    Post.findById(id).then(post => {
-        res.render('updateform.ejs',{post:post})
-    })
-})
 
 app.post('/update/:id',(req,res)=>{
     var id = req.params.id
@@ -147,14 +154,6 @@ app.post('/update/:id',(req,res)=>{
     Post.findByIdAndUpdate(id,updatedData).then(res.redirect('/home')).catch(err => console.log(err))
     
 })
-
-app.get('/delete/:id', isLoggedIn,(req,res)=>{
-    var id = req.params.id
-    Post.findByIdAndDelete(id).then(console.log("deleted")).catch(err => console.log(err))
-    res.redirect('/home')
-})
-
-
 
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
