@@ -15,10 +15,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+            
     <style>
         body{
             color:white;
             background-color: #1a1a1a;
+        }
+        #navid a{
+          text-decoration: none;
         }
         .opening{
             width:100%;
@@ -29,47 +36,51 @@
                 width:100%;
             }
         }
+        #slide a:hover{
+          text-decoration: none;
+              color: black;
+        }
+        footer{
+          margin:auto;
+          height: 50px;
+          text-align: center;
+          color:white;
+        }
+        #foot a{
+          text-decoration: none;
+          color: cornsilk;
+        }
+        .message{
+          padding-top: 0.75%;
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
-        <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-        </div>
-      </nav>
+  <nav id="navid">
+    <div class="nav-wrapper deep-purple darken-3">
+      <div class="container">
+        <a href="#" class="brand-logo">Forge Accelerator</a>
+        <a href="#" class="sidenav-trigger" data-target="slide"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#"><img class="circle" src="https://cdn-images-1.medium.com/max/1200/1*WIkkoGe3qL3tZXL2iY4luw.jpeg" width="55" height="55" style="margin-top:3px;"></a></li>
+          <li class="active"><a>Home</a></li>
+          <li><a href="https://blog.forgeforward.in/">Blogs</a></li>
+          <li><a href="#foot">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <ul class="sidenav" id="slide">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="https://images.unsplash.com/photo-1527259216948-b0c66d6fc31f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" width="1000" height="750">
+      </div>
+      <a href="#user"><img class="circle" src="https://cdn-images-1.medium.com/max/1200/1*WIkkoGe3qL3tZXL2iY4luw.jpeg"></a>
+    <li><a><i class="material-icons">home</i>Home</a></li>
+    <li><a href="https://blog.forgeforward.in/"><i class="material-icons">border_color</i>Blogs</a></li>
+    <li><a><i class="material-icons">local_phone</i>Contact</a></li>
+  </ul>
     <div class="container">
         <h1 class="text-center mt-3">20.1 Newsletter</h1>
         <div class="row mt-5">
@@ -126,7 +137,13 @@
             </div>
         </div>
     </div>
-    
+    <footer class="deep-purple darken-3" id="foot">
+      <div class="message">Contact Us At:<a href="https://www.forgeforward.in/">Our Offical Website</a></div>
+    </footer>
+    <script>
+      const slide_menu=document.querySelectorAll(".sidenav");
+      M.Sidenav.init(slide_menu,{});
+    </script>
 </body>
 
 </html>
